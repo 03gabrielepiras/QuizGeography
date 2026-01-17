@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>1GL1-GL2 GEOGRAFIA • Prof. G. Albiani</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <div class="brand">
+        <div class="brand__flag" aria-hidden="true">🌍</div>
+        <div>
+          <div class="brand__title">1GL1-GL2 • GEOGRAFIA</div>
+          <div class="brand__sub muted">Prof. G. Albiani • Demografia • Migrazioni • Città</div>
+        </div>
+      </div>
+      <div id="hello" class="pill">Ciao 👋</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Login / Nome -->
+    <section class="card" id="who">
+      <h2>Chi sei?</h2>
+      <p class="muted">Scrivi il tuo nome una sola volta: resterà salvato nella PWA.</p>
+      <div class="row">
+        <input id="nameInput" type="text" placeholder="Es. Gabriele" autocomplete="name" />
+        <button id="saveNameBtn" class="btn primary">Entra</button>
+      </div>
+    </section>
+
+    <!-- Setup -->
+    <section class="card hidden" id="setup">
+      <div class="setupHead">
+        <div>
+          <h2>Modalità</h2>
+          <p class="muted">Allenamento = feedback immediato. Verifica = voto alla fine.</p>
+        </div>
+        <button id="classBtn" class="btn">Classe</button>
+      </div>
+
+      <div class="grid">
+        <label class="field">
+          <span>Modalità</span>
+          <select id="mode">
+            <option value="practice" selected>Allenamento</option>
+            <option value="test">Verifica</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Domande</span>
+          <select id="count">
+            <option>10</option>
+            <option>20</option>
+            <option selected>38</option>
+            <option>50</option>
+          </select>
+        </label>
+
+        <div class="field">
+          <span class="muted">Argomenti</span>
+          <div class="muted" style="padding:10px 12px;border:1px solid rgba(255,255,255,.10);border-radius:12px;background:rgba(0,0,0,.15)">
+            Domande sempre casuali (Demografia • Migrazioni • Città)
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="startBtn" class="btn primary">Avvia</button>
+        <button id="resumeBtn" class="btn">Riprendi</button>
+        <button id="resetBtn" class="btn danger">Reset progressi</button>
+      </div>
+
+      <div class="note">
+        <div class="note__title">Progressi competenze</div>
+        <div class="skills" id="skills"></div>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section class="card hidden" id="quiz">
+      <div class="quizHead">
+        <div>
+          <h2 id="qTitle">Domanda</h2>
+          <p class="muted" id="qMeta"></p>
+        </div>
+        <div class="pill" id="scorePill">0/0</div>
+      </div>
+
+      <div class="progress"><div class="progress__bar" id="progressBar"></div></div>
+
+      <div class="note" id="postit">
+        <div class="note__title">Post-it</div>
+        <div class="note__body" id="postitText">...</div>
+      </div>
+
+      <div class="qbox">
+        <div class="qtext" id="qText">...</div>
+        <div class="choices" id="choices"></div>
+
+        <div id="openWrap" class="hidden">
+          <label class="field">
+            <span class="muted">Risposta</span>
+            <input id="openInput" type="text" placeholder="Scrivi qui..." />
+          </label>
+          <div class="actions">
+            <button id="checkOpenBtn" class="btn primary">Verifica</button>
+          </div>
+          <p class="muted" id="openHint"></p>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+      </div>
+
+      <div class="actions">
+        <button id="prevBtn" class="btn">Indietro</button>
+        <button id="nextBtn" class="btn primary" disabled>Avanti</button>
+        <button id="finishBtn" class="btn danger">Fine & Voto</button>
+      </div>
+    </section>
+
+    <!-- Result -->
+    <section class="card hidden" id="result">
+      <h2>Risultato</h2>
+      <p id="resultText" class="big"></p>
+      <div class="actions">
+        <button id="reviewBtn" class="btn">Rivedi errori</button>
+        <button id="backBtn" class="btn primary">Torna</button>
+      </div>
+      <div id="review" class="review hidden"></div>
+    </section>
+
+    <!-- Classe -->
+    <section class="card hidden" id="classPanel">
+      <div class="setupHead">
+        <div>
+          <h2>Classe 1GL1-GL2</h2>
+          <p class="muted">Presenze realtime • online/offline • ultimo accesso.</p>
+        </div>
+        <button id="closeClassBtn" class="btn">Chiudi</button>
+      </div>
+
+      <div class="classStats" id="classStats"></div>
+      <div class="muted" style="margin-top:10px">I compagni inseriscono il nome solo la prima volta. Poi la PWA si collega automaticamente.</div>
+    </section>
+
+    <footer class="footer muted">
+      <p>Offline-first (PWA). Contenuti basati sulle slide/appunti del prof.</p>
+    </footer>
+  </main>
+
+  <!-- Firebase (Realtime Classe) - compat build for static sites -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+  <script src="quiz.js?v=20260117-fb" defer></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+</body>
+</html>
