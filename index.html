@@ -1,59 +1,158 @@
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Quiz Geografia — UDA 2 (1–75)</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-<header>
-  <h1>Quiz Geografia — UDA 2</h1>
-  <div class="sub">Demografia · Migrazioni · Città · 75 domande</div>
-</header>
-
-<div class="container">
-  <div class="bar">
-    <span class="pill">Timer: <strong id="timer">00:00</strong></span>
-    <span class="pill">Punteggio: <strong id="score">0</strong>/<span id="total">0</span></span>
-
-    <button class="primary" id="startBtn">Avvia</button>
-    <button id="finishBtn">Fine &amp; Voto</button>
-    <button class="danger" id="restartBtn">Ricomincia</button>
-    <button id="modeBtn">Modalità: Allenamento</button>
-  </div>
-
-  <div class="row">
-    <div class="left box">
-      <strong>Indice domande</strong>
-      <div class="muted" style="margin:6px 0 8px;">Tocca un numero per andare alla domanda.</div>
-      <div class="indexgrid" id="index"></div>
-    </div>
-
-    <div class="right box question">
-      <div class="muted" id="chapterLabel"></div>
-      <h2 id="prompt">Premi “Avvia” per iniziare.</h2>
-      <div id="options"></div>
-
-      <div class="explain" id="explain" style="display:none;">
-        <div class="title" id="explainTitle"></div>
-        <div id="explainText"></div>
-        <div class="muted" id="explainLong" style="margin-top:8px;"></div>
-      </div>
-
-      <div class="bar" style="margin-top:10px;">
-        <button id="prevBtn">Indietro</button>
-        <button id="nextBtn">Avanti</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="box results" id="results" style="display:none;">
-    <strong>Risultati</strong>
-    <div style="margin-top:8px;" id="resultsBody"></div>
-  </div>
-</div>
-
-<script src="./app.js"></script>
-</body>
-</html>
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/index.html b/index.html
+index 0dcf9b6c366c27606420b102c25b9f013f86056d..9e4bf7e297b7403fb91cdd305619e4728bf544e9 100644
+--- a/index.html
++++ b/index.html
+@@ -1,59 +1,107 @@
+ <!doctype html>
+ <html lang="it">
+ <head>
+   <meta charset="utf-8">
+-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+-  <title>Quiz Geografia — UDA 2 (1–75)</title>
++  <meta name="viewport" content="width=device-width, initial-scale=1">
++  <title>Quiz Geografia — UDA 2</title>
+   <link rel="stylesheet" href="./style.css">
+ </head>
+ <body>
+-<header>
+-  <h1>Quiz Geografia — UDA 2</h1>
+-  <div class="sub">Demografia · Migrazioni · Città · 75 domande</div>
+-</header>
++  <header class="site-header">
++    <div class="brand">
++      <div class="badge">Quiz</div>
++      <div>
++        <h1>Geografia — UDA 2</h1>
++        <p>Demografia · Migrazioni · Città · 75 domande</p>
++      </div>
++    </div>
++    <div class="stats">
++      <div class="stat">
++        <span>Timer</span>
++        <strong id="timer">00:00</strong>
++      </div>
++      <div class="stat">
++        <span>Punteggio</span>
++        <strong><span id="score">0</span>/<span id="total">0</span></strong>
++      </div>
++      <div class="stat">
++        <span>Classe</span>
++        <strong id="className">—</strong>
++      </div>
++    </div>
++  </header>
+ 
+-<div class="container">
+-  <div class="bar">
+-    <span class="pill">Timer: <strong id="timer">00:00</strong></span>
+-    <span class="pill">Punteggio: <strong id="score">0</strong>/<span id="total">0</span></span>
++  <main class="container">
++    <section class="panel">
++      <div class="panel-header">
++        <div>
++          <h2>Classe e Goal</h2>
++          <p>Gestisci la classe e lo storico dei risultati.</p>
++        </div>
++        <div class="panel-actions">
++          <button class="btn primary" id="startBtn">Avvia</button>
++          <button class="btn" id="finishBtn">Fine &amp; Voto</button>
++          <button class="btn danger" id="restartBtn">Ricomincia</button>
++          <button class="btn" id="modeBtn">Modalità: Allenamento</button>
++        </div>
++      </div>
++      <div class="panel-body">
++        <div class="field">
++          <label for="classInput">Nome classe</label>
++          <input id="classInput" type="text" placeholder="Es. 2B" autocomplete="off">
++        </div>
++        <div class="field">
++          <label for="goalInput">Goal (%)</label>
++          <input id="goalInput" type="number" min="0" max="100" step="1" placeholder="80">
++        </div>
++        <div class="field inline-actions">
++          <button class="btn primary" id="classLoadBtn">Accedi</button>
++          <button class="btn" id="goalSaveBtn">Salva goal</button>
++        </div>
++      </div>
++      <div class="panel-footer">
++        <p class="muted" id="classInfo">Seleziona una classe per salvare risultati e goal.</p>
++        <div class="class-results" id="classResults"></div>
++      </div>
++    </section>
+ 
+-    <button class="primary" id="startBtn">Avvia</button>
+-    <button id="finishBtn">Fine &amp; Voto</button>
+-    <button class="danger" id="restartBtn">Ricomincia</button>
+-    <button id="modeBtn">Modalità: Allenamento</button>
+-  </div>
++    <section class="grid">
++      <aside class="card">
++        <div class="card-header">
++          <h3>Indice domande</h3>
++          <p class="muted">Tocca un numero per andare alla domanda.</p>
++        </div>
++        <div class="index-grid" id="index"></div>
++      </aside>
+ 
+-  <div class="row">
+-    <div class="left box">
+-      <strong>Indice domande</strong>
+-      <div class="muted" style="margin:6px 0 8px;">Tocca un numero per andare alla domanda.</div>
+-      <div class="indexgrid" id="index"></div>
+-    </div>
++      <section class="card question">
++        <div class="pill" id="categoryLabel"></div>
++        <h2 id="prompt">Premi “Avvia” per iniziare.</h2>
++        <div class="didyouknow" id="didyouknow"></div>
++        <div class="options" id="options"></div>
+ 
+-    <div class="right box question">
+-      <div class="muted" id="chapterLabel"></div>
+-      <h2 id="prompt">Premi “Avvia” per iniziare.</h2>
+-      <div id="options"></div>
++        <div class="explain" id="explain" style="display:none;">
++          <div class="title" id="explainTitle"></div>
++          <div id="explainText"></div>
++          <div class="muted" id="explainLong"></div>
++        </div>
+ 
+-      <div class="explain" id="explain" style="display:none;">
+-        <div class="title" id="explainTitle"></div>
+-        <div id="explainText"></div>
+-        <div class="muted" id="explainLong" style="margin-top:8px;"></div>
+-      </div>
++        <div class="nav">
++          <button class="btn" id="prevBtn">Indietro</button>
++          <button class="btn" id="nextBtn">Avanti</button>
++        </div>
++      </section>
++    </section>
+ 
+-      <div class="bar" style="margin-top:10px;">
+-        <button id="prevBtn">Indietro</button>
+-        <button id="nextBtn">Avanti</button>
++    <section class="card results" id="results" style="display:none;">
++      <div class="card-header">
++        <h3>Risultati</h3>
+       </div>
+-    </div>
+-  </div>
+-
+-  <div class="box results" id="results" style="display:none;">
+-    <strong>Risultati</strong>
+-    <div style="margin-top:8px;" id="resultsBody"></div>
+-  </div>
+-</div>
++      <div class="goal" id="goal"></div>
++      <div id="resultsBody"></div>
++    </section>
++  </main>
+ 
+-<script src="./app.js"></script>
++  <script src="./app.js"></script>
+ </body>
+ </html>
+ 
+EOF
+)
