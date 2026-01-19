@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "block": "G3",
+  "questions": [
+    {
+      "type": "mcq",
+      "block": "G3",
+      "skill": "G3_C1",
+      "prompt": "Secondo le slide, oggi la popolazione mondiale che vive in aree urbane è circa:",
+      "choices": [
+        "20%",
+        "57%",
+        "70%",
+        "95%"
+      ],
+      "answerIndex": 1,
+      "rule": "Il tasso di urbanizzazione indica la percentuale di popolazione che vive in città.",
+      "example": "Nelle slide: oggi oltre il 57% vive in città.",
+      "explainOk": "Corretto: circa 57%.",
+      "explainNo": "Nelle slide il valore è ~57%, non 70% o 95%.",
+      "id": "G3_001"
+    },
+    {
+      "type": "mcq",
+      "block": "G3",
+      "skill": "G3_C2",
+      "prompt": "Una città è un insediamento che di solito ha:",
+      "choices": [
+        "Bassa densità e spazio semplice",
+        "Alta densità e organizzazione complessa dello spazio",
+        "Solo attività agricole",
+        "Case sparse e isolate"
+      ],
+      "answerIndex": 1,
+      "rule": "La città si distingue per densità elevata e funzioni/organizzazione complesse.",
+      "example": "Quartieri, servizi, rete di trasporti, funzioni diverse.",
+      "explainOk": "Giusto: densità alta e spazio complesso.",
+      "explainNo": "La città non è un insediamento a bassa densità: è più concentrata e complessa.",
+      "id": "G3_002"
+    },
+    {
+      "type": "mcq",
+      "block": "G3",
+      "skill": "G3_C3",
+      "prompt": "Nelle slide, l’importanza di una città nella rete urbana dipende dal suo:",
+      "choices": [
+        "Rango (ruolo nella gerarchia urbana)",
+        "Colore degli edifici",
+        "Clima",
+        "Numero di parchi"
+      ],
+      "answerIndex": 0,
+      "rule": "Il rango descrive il ruolo/servizi offerti e la posizione nella gerarchia urbana.",
+      "example": "Città globale vs città media.",
+      "explainOk": "Corretto: rango.",
+      "explainNo": "Per le slide conta il ruolo nella gerarchia urbana (rango).",
+      "id": "G3_003"
+    },
+    {
+      "type": "mcq",
+      "block": "G3",
+      "skill": "G3_C4",
+      "prompt": "Una megalopoli (slide) è:",
+      "choices": [
+        "Una singola città con 1 milione di abitanti",
+        "Un insieme di aree metropolitane che si fondono (almeno 10 milioni)",
+        "Un villaggio agricolo",
+        "Una capitale di Stato"
+      ],
+      "answerIndex": 1,
+      "rule": "Megalopoli = grande regione urbanizzata continua (unione di aree metropolitane).",
+      "example": "Tokaido o Bos-Wash.",
+      "explainOk": "Esatto: fusione di aree metropolitane.",
+      "explainNo": "Non è una singola città: è un sistema di aree urbane contigue.",
+      "id": "G3_004"
+    },
+    {
+      "type": "mcq",
+      "block": "G3",
+      "skill": "G3_C4",
+      "prompt": "Nelle slide, quale megalopoli è indicata come la più popolosa?",
+      "choices": [
+        "Bos-Wash",
+        "Tokaido",
+        "Roma",
+        "Milano"
+      ],
+      "answerIndex": 1,
+      "rule": "Le slide citano Tokaido (Giappone) come molto popolosa.",
+      "example": "Tokaido include Tokyo e altre grandi città.",
+      "explainOk": "Corretto: Tokaido.",
+      "explainNo": "La risposta nelle slide è Tokaido.",
+      "id": "G3_005"
+    },
+    {
+      "type": "mcq",
+      "block": "G3",
+      "skill": "G3_C5",
+      "prompt": "Le città dei Paesi in via di sviluppo, nelle slide, sono spesso caratterizzate da:",
+      "choices": [
+        "Urbanizzazione rapida e baraccopoli",
+        "Assenza di contrasti sociali",
+        "Solo quartieri benestanti",
+        "Pianta sempre a scacchiera perfetta"
+      ],
+      "answerIndex": 0,
+      "rule": "Urbanizzazione rapida + disuguaglianze possono generare baraccopoli e servizi insufficienti.",
+      "example": "Aree periferiche informali senza pianificazione.",
+      "explainOk": "Giusto: urbanizzazione rapida e baraccopoli.",
+      "explainNo": "Le slide parlano proprio di urbanizzazione rapida e baraccopoli.",
+      "id": "G3_006"
+    }
+  ]
+}
