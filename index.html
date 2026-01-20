@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Geografia v18.3</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <meta name="theme-color" content="#0b1220"/>
+</head>
+<body>
+  <div id="app" class="wrap">
+    <header class="topbar">
+      <div>
+        <div class="kicker">1GL1-GL2 • Geografia</div>
+        <h1 class="title">Geografia</h1>
+      </div>
+      <div class="pill">v18.3</div>
+    </header>
+    <div id="jsStatus" class="muted small" style="margin:6px 2px 0 2px;"></div>
+
+    <section id="nameBox" class="card">
+      <h2 class="h2">Benvenuto</h2>
+      <p class="muted">Inserisci il tuo nome per iniziare.</p>
+      <div class="row">
+        <input id="nameInput" class="input" placeholder="Nome"/>
+        <button class="btn primary" id="btnEnter">Entra</button>
+      </div>
+    </section>
+
+    <section id="menu" class="card hidden">
+      <h2 class="h2">Scegli modalità</h2>
+      <p id="welcome" class="muted"></p>
+      <div class="row wraprow">
+        <button class="btn primary" id="btnTrain">Allenamento</button>
+        <button class="btn" id="btnTest">Verifica</button>
+      </div>
+      <div class="muted small">In Allenamento vedrai anche: contesto del prof, grafici e analisi del dato.</div>
+    </section>
+
+    <section id="quiz" class="card hidden">
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <div class="badge" id="blockBadge"></div>
+        <div id="progressText" class="muted small"></div>
+      </div>
+
+      <div id="phenomenonBox" class="phenomenon hidden">
+        <div class="phenTitle">🧠 Fenomeno (spiegazione)</div>
+        <div id="phenomenonText" class="phenText"></div>
+        <figure id="mediaBox" class="media hidden">
+          <img id="mediaImg" alt="Grafico/slide"/>
+          <figcaption id="mediaCap" class="small muted"></figcaption>
+        </figure>
+        <div id="chartBox" class="chart hidden">
+          <div class="small muted" id="chartTitle"></div>
+          <canvas id="chartCanvas" width="520" height="260"></canvas>
+          <div class="small muted" id="chartNote"></div>
+          <div class="small muted" id="chartSource"></div>
+        </div>
+      </div>
+
+      <h2 id="question" class="q"></h2>
+      <div id="answers" class="answers"></div>
+
+      <div id="analysisBox" class="analysis hidden">
+        <div class="analysisTitle">📊 Analisi del dato</div>
+        <p id="analysisText" class="analysisText"></p>
+        <div class="small muted" id="analysisSource"></div>
+      </div>
+
+      <div id="feedback" class="feedback hidden"></div>
+
+      <div class="row wraprow">
+        <button class="btn" id="btnNext">Avanti</button>
+        <button class="btn ghost" id="btnMenu">Menu</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="analysisEngine.v18_1.js"></script>
+  <script src="questions.v18_3.js"></script>
+  <script src="charts.v18_1.js"></script>
+  <script src="app.v18_3.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
+    }
+  </script>
+  <script>
+    // Controllo caricamento JS (utile su iOS/PWA quando cache vecchie bloccano)
+    setTimeout(() => {
+      const el = document.getElementById("jsStatus");
+      if (!el) return;
+      if (window.__quizReady) {
+        el.textContent = "JS caricato ✅";
+      } else {
+        el.textContent = "JS NON caricato ❌ (probabile cache vecchia). Apri da Safari, ricarica, poi reinstalla la PWA.";
+        alert("La pagina non ha caricato il JS. Probabile cache vecchia: apri da Safari, ricarica, poi reinstalla la PWA.");
+      }
+    }, 800);
+  </script>
+</body>
+</html>
